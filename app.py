@@ -450,7 +450,7 @@ df = cargar_datos()
 # SECCIÓN DE CONTEXTO E INFORMACIÓN
 # ============================================================================
 
-with st.expander("ℹCONTEXTO E INFORMACIÓN - Haz clic para expandir", expanded=True):
+with st.expander("CONTEXTO E INFORMACIÓN - Haz clic para expandir", expanded=True):
     col_info1, col_info2 = st.columns(2)
     
     with col_info1:
