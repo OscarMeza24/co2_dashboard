@@ -163,11 +163,13 @@ def crear_grafico_lineas_temporal(df, paises_seleccionados, titulo):
         hovermode='x unified',
         plot_bgcolor='rgba(249, 250, 251, 0.5)',
         paper_bgcolor='white',
-        font=dict(size=11, color='#334155', family='Arial'),
+        font=dict(size=13, color='#1a1a1a', family='Arial'),
         height=500,
         xaxis_title='Año',
+        xaxis_title_font=dict(size=13, color='#334155'),
         yaxis_title='Emisiones CO2 (Megatoneladas)',
-        title_font=dict(size=16, color='#1e40af'),
+        yaxis_title_font=dict(size=13, color='#334155'),
+        title_font=dict(size=18, color='#558b2f', family='Segoe UI'),
         template='plotly_white',
         xaxis=dict(
             showgrid=True,
@@ -176,7 +178,8 @@ def crear_grafico_lineas_temporal(df, paises_seleccionados, titulo):
             zeroline=False,
             showline=True,
             linewidth=1,
-            linecolor='rgba(59, 130, 246, 0.2)'
+            linecolor='rgba(59, 130, 246, 0.2)',
+            tickfont=dict(size=12, color='#334155')
         ),
         yaxis=dict(
             showgrid=True,
@@ -186,7 +189,8 @@ def crear_grafico_lineas_temporal(df, paises_seleccionados, titulo):
             showline=True,
             linewidth=1,
             linecolor='rgba(59, 130, 246, 0.2)',
-            range=[0, max_co2 + margin]
+            range=[0, max_co2 + margin],
+            tickfont=dict(size=12, color='#334155')
         )
     )
     
@@ -239,8 +243,12 @@ def crear_mapa_geoespacial(df, ano_seleccionado):
         height=600,
         template='plotly_white',
         paper_bgcolor='white',
-        title_font=dict(size=16, color='#1e40af'),
-        font=dict(color='#334155')
+        title_font=dict(size=18, color='#558b2f', family='Segoe UI'),
+        font=dict(color='#334155', size=12, family='Segoe UI'),
+        coloraxis_colorbar=dict(
+            title_font=dict(color='#334155'),
+            tickfont=dict(color='#334155')
+        )
     )
     
     return fig
@@ -310,11 +318,11 @@ def crear_grafico_radar(df, ano_seleccionado, region_seleccionada):
             radialaxis=dict(
                 visible=True,
                 range=[0, 100],
-                tickfont=dict(size=10, color='#334155'),
+                tickfont=dict(size=12, color='#334155'),
                 gridcolor='rgba(59, 130, 246, 0.15)'
             ),
             angularaxis=dict(
-                tickfont=dict(size=11, color='#1e40af'),
+                tickfont=dict(size=13, color='#558b2f', family='Segoe UI'),
                 gridcolor='rgba(59, 130, 246, 0.2)'
             ),
             bgcolor='rgba(245, 247, 250, 0.3)'
@@ -322,14 +330,17 @@ def crear_grafico_radar(df, ano_seleccionado, region_seleccionada):
         height=700,
         template='plotly_white',
         paper_bgcolor='white',
-        title_font=dict(size=16, color='#1e40af'),
-        font=dict(color='#334155'),
+        title_font=dict(size=18, color='#558b2f', family='Segoe UI'),
+        font=dict(color='#334155', size=12, family='Segoe UI'),
         title=f"COMPARATIVA DE INDICADORES - {ano_seleccionado}",
         showlegend=True,
         legend=dict(
             x=1.05,
             y=1,
-            font=dict(size=10, color='#334155')
+            font=dict(size=12, color='#334155', family='Segoe UI'),
+            bgcolor='rgba(255, 255, 255, 0.9)',
+            bordercolor='#334155',
+            borderwidth=1
         ),
         hovermode='closest'
     )
@@ -372,8 +383,8 @@ def crear_grafico_distribucion_regional(df, ano_seleccionado):
         paper_bgcolor='white',
         plot_bgcolor='rgba(245, 247, 250, 0.7)',
         hovermode='closest',
-        title_font=dict(size=16, color='#1e40af'),
-        font=dict(color='#334155'),
+        title_font=dict(size=18, color='#558b2f', family='Segoe UI'),
+        font=dict(color='#334155', size=12, family='Segoe UI'),
         xaxis=dict(
             showgrid=True,
             gridwidth=1,
@@ -381,13 +392,15 @@ def crear_grafico_distribucion_regional(df, ano_seleccionado):
             showline=True,
             linewidth=1,
             linecolor='rgba(59, 130, 246, 0.2)',
-            range=[0, max_co2_region + margin]
+            range=[0, max_co2_region + margin],
+            tickfont=dict(size=11, color='#334155')
         ),
         yaxis=dict(
             showgrid=False,
             showline=True,
             linewidth=1,
-            linecolor='rgba(59, 130, 246, 0.2)'
+            linecolor='rgba(59, 130, 246, 0.2)',
+            tickfont=dict(size=11, color='#334155')
         )
     )
     
@@ -398,91 +411,69 @@ def crear_grafico_distribucion_regional(df, ano_seleccionado):
 # INTERFAZ PRINCIPAL
 # ============================================================================
 
-# Encabezado con estética moderna y sutil
+# Encabezado corporativo y serio
 st.markdown("""
     <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 50%, #f0f4f8 100%);
-    }
-    
-    [data-testid="stMainBlockContainer"] {
-        background-color: transparent;
-    }
-    
     .main-header {
-        font-size: 2.8em;
-        background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 50%, #3b82f6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-size: 3.2em;
+        color: #2d5016;
         text-align: center;
         margin-bottom: 10px;
         font-weight: 900;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
+        border-bottom: 4px solid #558b2f;
+        padding-bottom: 20px;
     }
     
     .sub-header {
-        font-size: 1.1em;
-        color: #475569;
+        font-size: 1.25em;
+        color: #558b2f;
         text-align: center;
         margin-bottom: 30px;
-        font-weight: 500;
-        letter-spacing: 0.5px;
+        font-weight: 600;
     }
     
     .cyber-divider {
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #3b82f6, #2563eb, transparent);
+        height: 3px;
+        background: #558b2f;
         margin: 30px 0;
-        box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
     }
     
     .section-title {
-        font-size: 1.7em;
-        color: #1e40af;
-        margin: 30px 0 20px 0;
+        font-size: 2em;
+        color: #2d5016;
+        margin: 40px 0 25px 0;
         padding-bottom: 15px;
-        border-bottom: 2px solid #3b82f6;
-        text-shadow: 0 0 8px rgba(59, 130, 246, 0.1);
-        font-weight: 700;
-        letter-spacing: 0.5px;
+        border-bottom: 3px solid #558b2f;
+        font-weight: 800;
     }
     
     .stat-card {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(14, 165, 233, 0.08) 100%);
-        border: 1px solid rgba(59, 130, 246, 0.2);
-        border-radius: 15px;
-        padding: 20px;
-        margin: 10px 0;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
-        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #f0f0f0 0%, #f5f5f5 100%);
+        border: 2px solid #558b2f;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 15px 0;
+        box-shadow: 0 4px 6px rgba(85, 139, 47, 0.1);
     }
     
     .stat-card:hover {
-        border-color: rgba(59, 130, 246, 0.4);
-        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+        box-shadow: 0 6px 12px rgba(85, 139, 47, 0.2);
         transform: translateY(-2px);
     }
     
     .info-box {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(14, 165, 233, 0.05) 100%);
-        border: 1px solid rgba(59, 130, 246, 0.15);
+        background: linear-gradient(135deg, #f8f8f8 0%, #f5f5f5 100%);
+        border: 2px solid #558b2f;
         border-radius: 12px;
-        padding: 20px;
+        padding: 25px;
         margin: 15px 0;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+        box-shadow: 0 4px 6px rgba(85, 139, 47, 0.1);
     }
+    
     </style>
-    <div class="main-header">DASHBOARD GLOBAL CO2</div>
-    <div class="sub-header">Sistema Interactivo de Monitoreo de Emisiones de Carbono</div>
+    <div class="main-header">MONITOREO GLOBAL DE EMISIONES CO2</div>
+    <div class="sub-header">Análisis Corporativo de Contaminación Atmosférica 1990-2024</div>
     <div class="cyber-divider"></div>
 """, unsafe_allow_html=True)
 
@@ -499,45 +490,33 @@ with st.expander("ℹ️ CONTEXTO E INFORMACIÓN - Haz clic para expandir", expa
     with col_info1:
         st.markdown("""
         <div class="info-box">
-        <h3 style="color: #1e40af; margin-top: 0;">¿Qué es el CO2 y por qué importa?</h3>
-        <p style="color: #334155; line-height: 1.8;">
-        El <b>dióxido de carbono (CO2)</b> es un gas de efecto invernadero que se libera 
-        principalmente por la quema de combustibles fósiles (carbón, petróleo, gas natural).
-        </p>
-        <p style="color: #334155; line-height: 1.8;">
-        <b>Impacto ambiental:</b>
-        • Aumento de temperaturas globales
-        • Cambio climático acelerado
-        • Eventos climáticos extremos
-        • Afectación de ecosistemas
-        </p>
-        <p style="color: #334155; line-height: 1.8;">
-        <b>Monitorear las emisiones</b> es crucial para entender 
-        el progreso hacia objetivos de descarbonización global.
-        </p>
+        <h3 style="color: #558b2f; margin-top: 0; font-size: 1.3em; font-weight: 700;">¿Qué es el CO2 y por qué importa?</h3>
+        <p>El <b>dióxido de carbono (CO2)</b> es un gas de efecto invernadero que se libera 
+        principalmente por la quema de combustibles fósiles (carbón, petróleo, gas natural).</p>
+        <p><b>Impacto ambiental:</b><br>
+        • Aumento de temperaturas globales<br>
+        • Cambio climático acelerado<br>
+        • Eventos climáticos extremos<br>
+        • Afectación de ecosistemas</p>
+        <p><b>Monitorear las emisiones</b> es crucial para entender 
+        el progreso hacia objetivos de descarbonización global.</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col_info2:
         st.markdown("""
         <div class="info-box">
-        <h3 style="color: #1e40af; margin-top: 0;">Cómo usar este Dashboard</h3>
-        <p style="color: #334155; line-height: 1.8;">
-        <b>Panel de Control (Izquierda):</b>
-        • Selecciona una región geográfica
-        • Elige países específicos para analizar
-        • Ajusta el rango de años
-        </p>
-        <p style="color: #334155; line-height: 1.8;">
-        <b>Secciones:</b>
-        • <b>Evolución Temporal:</b> Trend histórico de emisiones
-        • <b>Distribución Geoespacial:</b> Mapa global interactivo
-        • <b>Relación Multivariable:</b> Análisis CO2 vs PIB vs Población
-        • <b>Análisis Avanzado:</b> Top emisores e intensidad carbónica
-        </p>
-        <p style="color: #334155; line-height: 1.8;">
-        <b>Datos:</b> Our World in Data (1990-2024)
-        </p>
+        <h3 style="color: #558b2f; margin-top: 0; font-size: 1.3em; font-weight: 700;">Cómo usar este Dashboard</h3>
+        <p><b>Panel de Control (Izquierda):</b><br>
+        • Selecciona una región geográfica<br>
+        • Elige países específicos para analizar<br>
+        • Ajusta el rango de años</p>
+        <p><b>Secciones:</b><br>
+        • <b>Evolución Temporal:</b> Trend histórico de emisiones<br>
+        • <b>Distribución Geoespacial:</b> Mapa global interactivo<br>
+        • <b>Relación Multivariable:</b> Análisis CO2 vs PIB vs Población<br>
+        • <b>Análisis Avanzado:</b> Top emisores e intensidad carbónica</p>
+        <p><b>Datos:</b> Our World in Data (1990-2024)</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -550,22 +529,14 @@ st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 with st.sidebar:
     st.markdown("""
     <style>
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e8ecf1 100%);
-        border-right: 1px solid rgba(59, 130, 246, 0.15);
-    }
-    
-    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
-        color: #1e40af;
-    }
-    
     .sidebar-title {
-        font-size: 1.2em;
-        color: #1e40af;
-        text-shadow: 0 0 8px rgba(59, 130, 246, 0.1);
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        margin-bottom: 15px;
+        font-size: 1.35em;
+        color: #2d5016;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #558b2f;
+        padding-bottom: 15px;
     }
     </style>
     <div class="sidebar-title">PANEL DE CONTROL</div>
@@ -576,7 +547,7 @@ with st.sidebar:
     # Selector de región
     regiones = ['Todas'] + sorted(df['Region'].unique().tolist())
     region_filtro = st.selectbox(
-        "Selecciona Región:",
+        "🌍 Selecciona Región:",
         regiones,
         help="Elige una región para filtrar los datos"
     )
@@ -588,9 +559,9 @@ with st.sidebar:
         paises_disponibles = sorted(df[df['Region'] == region_filtro]['Country'].unique().tolist())
     
     paises_seleccionados = st.multiselect(
-        "Selecciona Países:",
+        "🏴 Selecciona Países:",
         paises_disponibles,
-        default=paises_disponibles[:3],
+        default=paises_disponibles,
         help="Elige los países para visualizar en los gráficos"
     )
     
@@ -599,7 +570,7 @@ with st.sidebar:
     
     with col_año1:
         ano_min = st.slider(
-            "Año Inicial:",
+            "📅 Año Inicial:",
             1990,
             2024,
             1990,
@@ -609,7 +580,7 @@ with st.sidebar:
     
     with col_año2:
         ano_max = st.slider(
-            "Año Final:",
+            "📅 Año Final:",
             1990,
             2024,
             2022,
@@ -631,11 +602,11 @@ with st.sidebar:
     st.markdown("""
     <div class="info-box">
     <div class="sidebar-title">INFORMACIÓN DE DATOS</div>
-    <p style="color: #1e40af; font-size: 0.85em; line-height: 1.8;">
+    <p style="color: #558b2f; font-size: 0.85em; line-height: 1.8;">
     <b>Fuente:</b> Our World in Data<br>
     <b>Registros:</b> """ + str(len(df)) + """<br>
     <b>Países:</b> """ + str(df['Country'].nunique()) + """<br>
-    <b>⏰ Período:</b> """ + str(int(df['Year'].min())) + """-""" + str(int(df['Year'].max())) + """<br>
+    <b>Período:</b> """ + str(int(df['Year'].min())) + """-""" + str(int(df['Year'].max())) + """<br>
     <b>Regiones:</b> """ + str(df['Region'].nunique()) + """
     </p>
     </div>
@@ -648,10 +619,6 @@ if paises_seleccionados:
     df_filtrado_paises = df_filtrado[df_filtrado['Country'].isin(paises_seleccionados)]
 else:
     df_filtrado_paises = df_filtrado
-
-# ============================================================================
-# SECCIÓN 1: ESTADÍSTICAS GENERALES
-# ============================================================================
 
 # ============================================================================
 # SECCIÓN 1: ESTADÍSTICAS GENERALES
@@ -678,10 +645,10 @@ stats = obtener_estadisticas(df_filtrado_paises)
 
 metric_style = """
 <div class="stat-card">
-    <div style="color: #1e40af; font-size: 0.8em; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px;">
+    <div style="color: #558b2f; font-size: 0.95em; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 12px;">
         {label}
     </div>
-    <div style="color: #0ea5e9; font-size: 1.8em; font-weight: 900; text-shadow: 0 0 8px rgba(14, 165, 233, 0.2);">
+    <div style="color: #2d5016; font-size: 2.2em; font-weight: 900; line-height: 1.1;">
         {value}
     </div>
 </div>
@@ -703,10 +670,6 @@ with col5:
     st.markdown(metric_style.format(label="Países", value=f"{stats['paises']}"), unsafe_allow_html=True)
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
-
-# ============================================================================
-# SECCIÓN 1: EVOLUCIÓN TEMPORAL
-# ============================================================================
 
 # ============================================================================
 # SECCIÓN 2: EVOLUCIÓN TEMPORAL
@@ -741,7 +704,7 @@ else:
     st.warning("Selecciona al menos un país en los controles laterales para visualizar el gráfico temporal.")
 
 # Tabla de datos
-st.markdown("""<div style="color: #1e40af; font-size: 1.2em; font-weight: 700; margin: 20px 0 15px 0; letter-spacing: 1px;">TABLA DE DATOS - EVOLUCIÓN TEMPORAL</div>""", unsafe_allow_html=True)
+st.markdown("""<div style="color: #2d5016; font-size: 1.4em; font-weight: 800; margin: 25px 0 20px 0;">📊 TABLA DE DATOS - EVOLUCIÓN TEMPORAL</div>""", unsafe_allow_html=True)
 if paises_seleccionados:
     df_tabla = df_filtrado_paises[['Country', 'Region', 'Year', 'CO2', 'GDP', 'Population']].sort_values(
         by=['Country', 'Year']
@@ -753,14 +716,10 @@ else:
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
 # ============================================================================
-# SECCIÓN 2: DISTRIBUCIÓN GEOESPACIAL
-# ============================================================================
-
-# ============================================================================
 # SECCIÓN 3: DISTRIBUCIÓN GEOESPACIAL
 # ============================================================================
 
-st.markdown("""<div class="section-title">DISTRIBUCIÓN GEOESPACIAL</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="section-title">🌎 DISTRIBUCIÓN GEOESPACIAL</div>""", unsafe_allow_html=True)
 
 with st.expander("Cómo interpretar el mapa", expanded=False):
     st.markdown("""
@@ -790,8 +749,8 @@ with col_mapa1:
 with col_mapa2:
     st.markdown("""
     <div class="info-box">
-    <div style="color: #1e40af; font-size: 1.1em; font-weight: 700; margin-bottom: 15px; letter-spacing: 1px;">SOBRE EL MAPA</div>
-    <p style="color: #334155; font-size: 0.9em; line-height: 1.8;">
+    <div style="color: #558b2f; font-size: 1.1em; font-weight: 700; margin-bottom: 15px;">SOBRE EL MAPA</div>
+    <p>
     <b>Año:</b> """ + str(ano_mapa) + """<br>
     <b>Rojo/Magenta:</b> Mayor emisión<br>
     <b>Amarillo:</b> Emisión media<br>
@@ -813,11 +772,7 @@ st.plotly_chart(fig_dist_regional, use_container_width=True)
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
 # ============================================================================
-# SECCIÓN 3: RELACIÓN MULTIVARIABLE (3D)
-# ============================================================================
-
-# ============================================================================
-# SECCIÓN 4: RELACIÓN MULTIVARIABLE (3D)
+# SECCIÓN 4: RELACIÓN MULTIVARIABLE
 # ============================================================================
 
 st.markdown("""<div class="section-title">RELACIÓN MULTIVARIABLE - CO2 vs PIB vs POBLACIÓN</div>""", unsafe_allow_html=True)
@@ -866,55 +821,89 @@ with col_3d2:
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
-st.header("Analisis Avanzado")
+st.markdown("""<div class="section-title">🔬 ANÁLISIS AVANZADO</div>""", unsafe_allow_html=True)
+
+with st.expander("📖 Qué significan estos gráficos", expanded=False):
+    col_exp1, col_exp2 = st.columns(2)
+    
+    with col_exp1:
+        st.markdown("""
+        **🏆 Top 10 Países - Mayor Emisor de CO2**
+        
+        Este gráfico muestra los 10 países que emiten más dióxido de carbono en el mundo.
+        
+        **Interpretación:**
+        - **Barra más larga** = Mayor contaminador
+        - **Color por región** = Puedes ver qué continentes concentran más emisiones
+        - **Rango en Mt** = Megatoneladas de CO2
+        
+        **¿Por qué importa?**
+        Identificar los principales emisores es fundamental para políticas ambientales y compromisos internacionales. China, USA e India dominan porque tienen grandes poblaciones e industrias intensivas en energía.
+        """)
+    
+    with col_exp2:
+        st.markdown("""
+        **⚡ Intensidad Carbónica - Eficiencia Energética**
+        
+        Mide cuántas toneladas de CO2 emite un país por cada dólar de PIB generado.
+        
+        **Interpretación:**
+        - **Barra más larga** = Menos eficiente (emite mucho CO2 por dólar producido)
+        - **Barra más corta** = Más eficiente (genera más valor con menos emisiones)
+        - **Rango CO2/PIB** = Ratio de emisiones respecto a riqueza
+        
+        **¿Por qué importa?**
+        Un país con alta intensidad carbónica depende mucho de combustibles fósiles. Un país eficiente usa más energías renovables y tecnología limpia. Refleja el modelo económico y ambiental.
+        """)
+    
+    st.markdown("---")
+    st.info("💡 **Dato interesante:** Países como Noruega tienen baja intensidad carbónica (mucha energía limpia), mientras que países en desarrollo suelen tener intensidad alta (dependencia de carbón/petróleo).")
 
 col_análisis1, col_análisis2 = st.columns(2)
 
 with col_análisis1:
-    st.subheader("Top 10 Paises")
+    st.markdown("""<div style="color: #2d5016; font-size: 1.2em; font-weight: 700; margin-bottom: 15px;">🏆 Top 10 Países</div>""", unsafe_allow_html=True)
     df_top = df[df['Year'] == ano_mapa].nlargest(10, 'CO2')[['Country', 'CO2', 'Region']]
     fig_top = px.bar(df_top, x='CO2', y='Country', orientation='h', color='Region', 
-                     title=f"Top 10 Emisores - {ano_mapa}", labels={'CO2': 'Emisiones (Mt)', 'Country': 'Pais'})
+                     title=f"Top 10 Emisores - {ano_mapa}", labels={'CO2': 'Emisiones (Mt)', 'Country': 'País'})
     fig_top.update_layout(height=450, template='plotly_white', paper_bgcolor='white', 
-                          plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#1e40af'),
-                          font=dict(color='#334155'), showlegend=False, 
-                          xaxis=dict(showgrid=True, gridwidth=1, gridcolor='rgba(59, 130, 246, 0.1)'))
+                          plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#558b2f'),
+                          font=dict(color='#334155', size=11), showlegend=False)
     st.plotly_chart(fig_top, use_container_width=True)
 
 with col_análisis2:
-    st.subheader("Intensidad Carbonica")
+    st.markdown("""<div style="color: #2d5016; font-size: 1.2em; font-weight: 700; margin-bottom: 15px;">⚡ Intensidad Carbónica</div>""", unsafe_allow_html=True)
     df_intensidad = df[df['Year'] == ano_mapa].copy()
     df_intensidad['Intensidad'] = df_intensidad['CO2'] / (df_intensidad['GDP'] + 1)
     df_intensidad_top = df_intensidad.nlargest(10, 'Intensidad')[['Country', 'Intensidad', 'Region']]
     fig_intensidad = px.bar(df_intensidad_top, x='Intensidad', y='Country', orientation='h', color='Region',
-                            title=f"Eficiencia Energetica - {ano_mapa}", labels={'Intensidad': 'CO2/PIB', 'Country': 'Pais'})
+                            title=f"Eficiencia Energética - {ano_mapa}", labels={'Intensidad': 'CO2/PIB', 'Country': 'País'})
     fig_intensidad.update_layout(height=450, template='plotly_white', paper_bgcolor='white', 
-                                plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#1e40af'),
-                                font=dict(color='#334155'), showlegend=False,
-                                xaxis=dict(showgrid=True, gridwidth=1, gridcolor='rgba(59, 130, 246, 0.1)'))
+                                plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#558b2f'),
+                                font=dict(color='#334155', size=11), showlegend=False)
     st.plotly_chart(fig_intensidad, use_container_width=True)
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
-with st.expander("Notas Metodologicas y Fuentes", expanded=False):
+with st.expander("Notas Metodológicas y Fuentes", expanded=False):
     col_nota1, col_nota2 = st.columns(2)
     with col_nota1:
-        st.subheader("Fuente de Datos")
+        st.subheader("📚 Fuente de Datos")
         st.write("**Our World in Data (OWID)**")
         st.write("Dataset de emisiones de carbono compilado por investigadores de la Universidad de Oxford.")
-        st.write("- **Cobertura:** 180+ paises")
+        st.write("- **Cobertura:** 180+ países")
         st.write("- **Periodo:** 1750-2024")
     with col_nota2:
         st.subheader("Definiciones")
         st.write("**CO2:** Emisiones totales en megatoneladas")
         st.write("**PIB:** Producto Interno Bruto en USD (2015)")
-        st.write("**Poblacion:** Total de habitantes")
+        st.write("**Población:** Total de habitantes")
 
 st.markdown("---")
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.write("**Dashboard CO2**  \nAnalisis Global 1990-2024")
+    st.write("**Dashboard CO2**\nAnálisis Global 1990-2024")
 with col2:
-    st.write("**Fuente**  \nOur World in Data")
+    st.write("**Fuente**\nOur World in Data")
 with col3:
-    st.write("**Tecnologia**  \nStreamlit + Plotly")
+    st.write("**Tecnología**\nStreamlit + Plotly")
