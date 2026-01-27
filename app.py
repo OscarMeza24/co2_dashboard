@@ -29,17 +29,13 @@ st.set_page_config(
 @st.cache_data
 def cargar_datos():
     """
-    Carga el dataset de CO2 desde el archivo CSV (Our World in Data).
+    Carga el dataset de CO2 desde Our World in Data (owid-co2-data.csv).
     
     Returns:
         pd.DataFrame: DataFrame con los datos de CO2
     """
-    # Intentar cargar el archivo real de OWID primero
-    try:
-        df = pd.read_csv('owid-co2-data.csv')
-    except FileNotFoundError:
-        # Si no existe, cargar el archivo de ejemplo
-        df = pd.read_csv('data_co2.csv')
+    # Cargar el dataset de Our World in Data
+    df = pd.read_csv('owid-co2-data.csv')
     
     # Renombrar columnas para consistencia
     if 'country' in df.columns:
@@ -61,32 +57,52 @@ def cargar_datos():
             'Indonesia': 'Asia', 'Thailand': 'Asia', 'Vietnam': 'Asia', 'Philippines': 'Asia', 'Malaysia': 'Asia',
             'Pakistan': 'Asia', 'Bangladesh': 'Asia', 'Myanmar': 'Asia', 'Sri Lanka': 'Asia', 'Cambodia': 'Asia',
             'Hong Kong': 'Asia', 'Taiwan': 'Asia', 'Singapore': 'Asia', 'Nepal': 'Asia', 'Laos': 'Asia',
+            'Mongolia': 'Asia', 'North Korea': 'Asia', 'Papua New Guinea': 'Asia', 'Brunei': 'Asia',
+            'Timor-Leste': 'Asia', 'Bhutan': 'Asia', 'Maldives': 'Asia', 'Fiji': 'Oceania',
             # Europe
             'Russia': 'Europe', 'Germany': 'Europe', 'United Kingdom': 'Europe', 'Italy': 'Europe', 'France': 'Europe', 'Spain': 'Europe', 'Poland': 'Europe', 'Ukraine': 'Europe',
             'Turkey': 'Europe', 'Greece': 'Europe', 'Czech Republic': 'Europe', 'Hungary': 'Europe',
             'Romania': 'Europe', 'Netherlands': 'Europe', 'Belgium': 'Europe', 'Austria': 'Europe', 'Switzerland': 'Europe',
             'Sweden': 'Europe', 'Norway': 'Europe', 'Denmark': 'Europe', 'Finland': 'Europe', 'Portugal': 'Europe',
             'Slovakia': 'Europe', 'Bulgaria': 'Europe', 'Serbia': 'Europe', 'Croatia': 'Europe', 'Lithuania': 'Europe',
+            'Slovenia': 'Europe', 'Latvia': 'Europe', 'Estonia': 'Europe', 'Bosnia': 'Europe', 'Albania': 'Europe',
+            'Macedonia': 'Europe', 'Moldova': 'Europe', 'Belarus': 'Europe', 'Georgia': 'Europe', 'Armenia': 'Europe',
+            'Azerbaijan': 'Europe', 'Iceland': 'Europe', 'Luxembourg': 'Europe', 'Malta': 'Europe', 'Cyprus': 'Europe',
             # North America
             'United States': 'North America', 'Canada': 'North America', 'Mexico': 'North America',
+            'Costa Rica': 'North America', 'Panama': 'North America', 'Guatemala': 'North America',
+            'Honduras': 'North America', 'El Salvador': 'North America', 'Nicaragua': 'North America', 'Belize': 'North America',
+            'Jamaica': 'North America', 'Trinidad and Tobago': 'North America', 'Cuba': 'North America', 'Dominican Republic': 'North America',
             # South America
             'Brazil': 'South America', 'Argentina': 'South America', 'Colombia': 'South America',
             'Chile': 'South America', 'Peru': 'South America', 'Venezuela': 'South America',
             'Ecuador': 'South America', 'Bolivia': 'South America', 'Paraguay': 'South America', 'Uruguay': 'South America',
+            'Guyana': 'South America', 'Suriname': 'South America',
             # Africa
             'South Africa': 'Africa', 'Nigeria': 'Africa', 'Egypt': 'Africa',
             'Morocco': 'Africa', 'Kenya': 'Africa', 'Uganda': 'Africa', 'Ethiopia': 'Africa', 'Ghana': 'Africa',
             'Algeria': 'Africa', 'Tunisia': 'Africa', 'Angola': 'Africa', 'Cameroon': 'Africa', 'Ivory Coast': 'Africa',
+            'Sudan': 'Africa', 'Tanzania': 'Africa', 'Zimbabwe': 'Africa', 'Zambia': 'Africa', 'Botswana': 'Africa',
+            'Senegal': 'Africa', 'Mali': 'Africa', 'Burkina Faso': 'Africa', 'Niger': 'Africa', 'Chad': 'Africa',
+            'Mozambique': 'Africa', 'Malawi': 'Africa', 'Rwanda': 'Africa', 'Benin': 'Africa', 'Togo': 'Africa',
+            'Gabon': 'Africa', 'Republic of Congo': 'Africa', 'Democratic Republic of Congo': 'Africa',
             # Middle East
             'Saudi Arabia': 'Middle East', 'Iran': 'Middle East', 'United Arab Emirates': 'Middle East',
-            'Qatar': 'Middle East', 'Kuwait': 'Middle East', 'Bahrain': 'Middle East', 'Oman': 'Middle East', 'Iraq': 'Middle East', 'Israel': 'Middle East',
+            'Qatar': 'Middle East', 'Kuwait': 'Middle East', 'Bahrain': 'Middle East', 'Oman': 'Middle East', 
+            'Iraq': 'Middle East', 'Israel': 'Middle East', 'Jordan': 'Middle East', 'Lebanon': 'Middle East',
+            'Syria': 'Middle East', 'Yemen': 'Middle East', 'Palestine': 'Middle East',
             # Oceania
-            'Australia': 'Oceania', 'New Zealand': 'Oceania',
+            'Australia': 'Oceania', 'New Zealand': 'Oceania', 'Fiji': 'Oceania', 'Samoa': 'Oceania',
+            'Vanuatu': 'Oceania', 'Kiribati': 'Oceania', 'Solomon Islands': 'Oceania',
         }
-        return regiones.get(pais, 'Otros')
+        region = regiones.get(pais, None)
+        return region  # Retorna None si no está en la lista
     
     if 'Region' not in df.columns:
         df['Region'] = df['Country'].apply(asignar_region)
+    
+    # IMPORTANTE: Excluir países sin región asignada (aquellos que hubieran sido "Otros")
+    df = df[df['Region'].notna()].copy()
     
     # Filtrar solo datos con CO2 válidos y año >= 1990
     df = df[(df['CO2'].notna()) & (df['Year'] >= 1990)].copy()
@@ -843,140 +859,62 @@ with col_3d1:
     st.plotly_chart(fig_burbujas, use_container_width=True)
 
 with col_3d2:
-    st.markdown("""
-    <div class="info-box">
-    <div style="color: #1e40af; font-size: 1.1em; font-weight: 700; margin-bottom: 15px; letter-spacing: 1px;">INTERPRETACIÓN</div>
-    <p style="color: #334155; font-size: 0.9em; line-height: 1.9;">
-    <b>Variables Comparadas:</b><br>
-    • Emisiones CO2<br>
-    • PIB<br>
-    • Población<br>
-    <br>
-    <b>Escala:</b><br>
-    0-100 (normalizado)<br>
-    <br>
-    <b>Lectura:</b><br>
-    Radios más amplios = 
-    mayores valores relativos<br>
-    <br>
-    Identifica patrones 
-    entre los 10 mayores 
-    emisores
-    </p>
-    </div>
-    """, unsafe_allow_html=True)
-    <br>
-    <b>Color:</b><br>
-    Por región geográfica
-    </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.subheader("Interpretacion del Radar")
+    st.write("**Variables:** Emisiones CO2, PIB, Poblacion")
+    st.write("**Escala:** 0-100 (normalizado)")
+    st.write("**Lectura:** Radios amplios indican valores altos relativos")
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
 st.header("Analisis Avanzado")
 
-with st.expander("Metricas avanzadas explicadas", expanded=False):
-    st.write("**Top 10 Paises - Mayores Emisiones:** Ranking de los 10 paises con mayores emisiones absolutas de CO2.")
-    st.write("**Intensidad Carbonica (CO2/PIB):** Relacion entre emisiones y produccion economica. Mide la eficiencia energetica.")
-
 col_análisis1, col_análisis2 = st.columns(2)
 
 with col_análisis1:
-    st.subheader("Top 10 Paises - Mayores Emisiones")
-    
+    st.subheader("Top 10 Paises")
     df_top = df[df['Year'] == ano_mapa].nlargest(10, 'CO2')[['Country', 'CO2', 'Region']]
-    
-    fig_top = px.bar(
-        df_top,
-        x='CO2',
-        y='Country',
-        orientation='h',
-        color='Region',
-        title=f"Top 10 Emisores - {ano_mapa}",
-        labels={'CO2': 'Emisiones (Mt)', 'Country': 'País'}
-    )
-    
-    fig_top.update_layout(
-        height=450,
-        template='plotly_white',
-        paper_bgcolor='white',
-        plot_bgcolor='rgba(245, 247, 250, 0.7)',
-        title_font=dict(size=16, color='#1e40af'),
-        font=dict(color='#334155'),
-        showlegend=False,
-        xaxis=dict(
-            showgrid=True,
-            gridwidth=1,
-            gridcolor='rgba(59, 130, 246, 0.1)'
-        )
-    )
+    fig_top = px.bar(df_top, x='CO2', y='Country', orientation='h', color='Region', 
+                     title=f"Top 10 Emisores - {ano_mapa}", labels={'CO2': 'Emisiones (Mt)', 'Country': 'Pais'})
+    fig_top.update_layout(height=450, template='plotly_white', paper_bgcolor='white', 
+                          plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#1e40af'),
+                          font=dict(color='#334155'), showlegend=False, 
+                          xaxis=dict(showgrid=True, gridwidth=1, gridcolor='rgba(59, 130, 246, 0.1)'))
     st.plotly_chart(fig_top, use_container_width=True)
 
 with col_análisis2:
-    st.subheader("Intensidad Carbonica (CO2/PIB)")
-    
+    st.subheader("Intensidad Carbonica")
     df_intensidad = df[df['Year'] == ano_mapa].copy()
-    df_intensidad['Intensidad'] = df_intensidad['CO2'] / (df_intensidad['GDP'] + 1)  # +1 para evitar división por 0
+    df_intensidad['Intensidad'] = df_intensidad['CO2'] / (df_intensidad['GDP'] + 1)
     df_intensidad_top = df_intensidad.nlargest(10, 'Intensidad')[['Country', 'Intensidad', 'Region']]
-    
-    fig_intensidad = px.bar(
-        df_intensidad_top,
-        x='Intensidad',
-        y='Country',
-        orientation='h',
-        color='Region',
-        title=f"Eficiencia Energética - {ano_mapa}",
-        labels={'Intensidad': 'CO2/PIB', 'Country': 'País'}
-    )
-    
-    fig_intensidad.update_layout(
-        height=450,
-        template='plotly_white',
-        paper_bgcolor='white',
-        plot_bgcolor='rgba(245, 247, 250, 0.7)',
-        title_font=dict(size=16, color='#1e40af'),
-        font=dict(color='#334155'),
-        showlegend=False,
-        xaxis=dict(
-            showgrid=True,
-            gridwidth=1,
-            gridcolor='rgba(59, 130, 246, 0.1)'
-        )
-    )
+    fig_intensidad = px.bar(df_intensidad_top, x='Intensidad', y='Country', orientation='h', color='Region',
+                            title=f"Eficiencia Energetica - {ano_mapa}", labels={'Intensidad': 'CO2/PIB', 'Country': 'Pais'})
+    fig_intensidad.update_layout(height=450, template='plotly_white', paper_bgcolor='white', 
+                                plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#1e40af'),
+                                font=dict(color='#334155'), showlegend=False,
+                                xaxis=dict(showgrid=True, gridwidth=1, gridcolor='rgba(59, 130, 246, 0.1)'))
     st.plotly_chart(fig_intensidad, use_container_width=True)
-
-st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
-
-# ============================================================================
-# PIE DE PÁGINA
-# ============================================================================
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
 with st.expander("Notas Metodologicas y Fuentes", expanded=False):
     col_nota1, col_nota2 = st.columns(2)
-    
     with col_nota1:
         st.subheader("Fuente de Datos")
         st.write("**Our World in Data (OWID)**")
-        st.write("Dataset completo de emisiones de carbono compilado por investigadores de la Universidad de Oxford.")
+        st.write("Dataset de emisiones de carbono compilado por investigadores de la Universidad de Oxford.")
         st.write("- **Cobertura:** 180+ paises")
         st.write("- **Periodo:** 1750-2024")
-        st.write("- **Variables:** 50+ indicadores climaticos")
-    
     with col_nota2:
-        st.subheader("Definiciones Tecnicas")
-        st.write("**CO2 (Megatoneladas):** Emisiones totales de dioxido de carbono, incluyendo combustibles fosiles y procesos industriales.")
-        st.write("**PIB (USD):** Producto Interno Bruto a precios constantes 2015.")
-        st.write("**Poblacion:** Total estimado de habitantes.")
+        st.subheader("Definiciones")
+        st.write("**CO2:** Emisiones totales en megatoneladas")
+        st.write("**PIB:** Producto Interno Bruto en USD (2015)")
+        st.write("**Poblacion:** Total de habitantes")
 
 st.markdown("---")
-
-col_footer1, col_footer2, col_footer3 = st.columns(3)
-with col_footer1:
+col1, col2, col3 = st.columns(3)
+with col1:
     st.write("**Dashboard CO2**  \nAnalisis Global 1990-2024")
-with col_footer2:
-    st.write("**Fuente**  \nOur World in Data (OWID)")
-with col_footer3:
-    st.write("**Tecnologia**  \nStreamlit + Plotly + Pandas")
+with col2:
+    st.write("**Fuente**  \nOur World in Data")
+with col3:
+    st.write("**Tecnologia**  \nStreamlit + Plotly")
