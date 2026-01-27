@@ -1,6 +1,6 @@
 """
 Dashboard Interactivo de Emisiones de CO2
-Autor: Sistema de Visualización Autónoma
+Autor: Sistema de Visualización de datos autonoma
 Descripción: Dashboard que visualiza emisiones de CO2 por país con análisis interactivos
 """
 
@@ -17,7 +17,6 @@ from datetime import datetime
 
 st.set_page_config(
     page_title="Dashboard CO2 Global",
-    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -31,8 +30,6 @@ def cargar_datos():
     """
     Carga el dataset de CO2 desde Our World in Data (owid-co2-data.csv).
     
-    Returns:
-        pd.DataFrame: DataFrame con los datos de CO2
     """
     # Cargar el dataset de Our World in Data
     df = pd.read_csv('owid-co2-data.csv')
@@ -101,7 +98,7 @@ def cargar_datos():
     if 'Region' not in df.columns:
         df['Region'] = df['Country'].apply(asignar_region)
     
-    # IMPORTANTE: Excluir países sin región asignada (aquellos que hubieran sido "Otros")
+    # IMPORTANTE: Excluir países sin región asignada
     df = df[df['Region'].notna()].copy()
     
     # Filtrar solo datos con CO2 válidos y año >= 1990
@@ -115,11 +112,6 @@ def obtener_estadisticas(df_filtrado):
     """
     Calcula estadísticas principales para el dashboard.
     
-    Args:
-        df_filtrado (pd.DataFrame): DataFrame filtrado
-        
-    Returns:
-        dict: Diccionario con estadísticas
     """
     return {
         'co2_total': df_filtrado['CO2'].sum(),
@@ -132,15 +124,8 @@ def obtener_estadisticas(df_filtrado):
 
 def crear_grafico_lineas_temporal(df, paises_seleccionados, titulo):
     """
-    Crea un gráfico de líneas temporal con filtro por país.
+    Gráfico de líneas temporal con filtro por país.
     
-    Args:
-        df (pd.DataFrame): Datos para visualizar
-        paises_seleccionados (list): Lista de países a mostrar
-        titulo (str): Título del gráfico
-        
-    Returns:
-        plotly.graph_objects.Figure: Figura de Plotly
     """
     df_filtrado = df[df['Country'].isin(paises_seleccionados)]
     
@@ -204,14 +189,8 @@ def crear_grafico_lineas_temporal(df, paises_seleccionados, titulo):
 
 def crear_mapa_geoespacial(df, ano_seleccionado):
     """
-    Crea un mapa geoespacial interactivo con datos por país.
+    Mapa geoespacial interactivo con datos por país.
     
-    Args:
-        df (pd.DataFrame): Datos para visualizar
-        ano_seleccionado (int): Año a visualizar
-        
-    Returns:
-        plotly.graph_objects.Figure: Figura de Plotly
     """
     df_ano = df[df['Year'] == ano_seleccionado].copy()
     
@@ -256,16 +235,9 @@ def crear_mapa_geoespacial(df, ano_seleccionado):
 
 def crear_grafico_radar(df, ano_seleccionado, region_seleccionada):
     """
-    Crea un gráfico de radar comparativo de países/regiones.
+    Gráfico de radar comparativo de países/regiones.
     Compara CO2, PIB y Población de forma normalizada.
     
-    Args:
-        df (pd.DataFrame): Datos para visualizar
-        ano_seleccionado (int): Año a visualizar
-        region_seleccionada (str): Región a filtrar
-        
-    Returns:
-        plotly.graph_objects.Figure: Figura de Plotly
     """
     df_filtrado = df[df['Year'] == ano_seleccionado].copy()
     
@@ -350,14 +322,8 @@ def crear_grafico_radar(df, ano_seleccionado, region_seleccionada):
 
 def crear_grafico_distribucion_regional(df, ano_seleccionado):
     """
-    Crea un gráfico de distribución de CO2 por región.
+    Gráfico de distribución de CO2 por región.
     
-    Args:
-        df (pd.DataFrame): Datos para visualizar
-        ano_seleccionado (int): Año a visualizar
-        
-    Returns:
-        plotly.graph_objects.Figure: Figura de Plotly
     """
     df_ano = df[df['Year'] == ano_seleccionado].copy()
     df_regional = df_ano.groupby('Region')['CO2'].sum().reset_index().sort_values('CO2', ascending=True)
@@ -484,7 +450,7 @@ df = cargar_datos()
 # SECCIÓN DE CONTEXTO E INFORMACIÓN
 # ============================================================================
 
-with st.expander("ℹ️ CONTEXTO E INFORMACIÓN - Haz clic para expandir", expanded=True):
+with st.expander("ℹCONTEXTO E INFORMACIÓN - Haz clic para expandir", expanded=True):
     col_info1, col_info2 = st.columns(2)
     
     with col_info1:
@@ -547,7 +513,7 @@ with st.sidebar:
     # Selector de región
     regiones = ['Todas'] + sorted(df['Region'].unique().tolist())
     region_filtro = st.selectbox(
-        "🌍 Selecciona Región:",
+        "Selecciona Región:",
         regiones,
         help="Elige una región para filtrar los datos"
     )
@@ -661,10 +627,10 @@ with col2:
     st.markdown(metric_style.format(label="CO2 Promedio", value=f"{stats['co2_promedio']:,.0f}"), unsafe_allow_html=True)
 
 with col3:
-    st.markdown(metric_style.format(label="💰 PIB Total", value=f"${stats['gdp_total']/1e12:.2f}T"), unsafe_allow_html=True)
+    st.markdown(metric_style.format(label="PIB Total", value=f"${stats['gdp_total']/1e12:.2f}T"), unsafe_allow_html=True)
 
 with col4:
-    st.markdown(metric_style.format(label="👥 Población", value=f"{stats['poblacion_total']/1e9:.2f}B"), unsafe_allow_html=True)
+    st.markdown(metric_style.format(label="Población", value=f"{stats['poblacion_total']/1e9:.2f}B"), unsafe_allow_html=True)
 
 with col5:
     st.markdown(metric_style.format(label="Países", value=f"{stats['paises']}"), unsafe_allow_html=True)
@@ -719,7 +685,7 @@ st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 # SECCIÓN 3: DISTRIBUCIÓN GEOESPACIAL
 # ============================================================================
 
-st.markdown("""<div class="section-title">🌎 DISTRIBUCIÓN GEOESPACIAL</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="section-title"> DISTRIBUCIÓN GEOESPACIAL</div>""", unsafe_allow_html=True)
 
 with st.expander("Cómo interpretar el mapa", expanded=False):
     st.markdown("""
@@ -821,9 +787,9 @@ with col_3d2:
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
-st.markdown("""<div class="section-title">🔬 ANÁLISIS AVANZADO</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="section-title">NÁLISIS AVANZADO</div>""", unsafe_allow_html=True)
 
-with st.expander("📖 Qué significan estos gráficos", expanded=False):
+with st.expander("Qué significan estos gráficos", expanded=False):
     col_exp1, col_exp2 = st.columns(2)
     
     with col_exp1:
@@ -888,7 +854,7 @@ st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 with st.expander("Notas Metodológicas y Fuentes", expanded=False):
     col_nota1, col_nota2 = st.columns(2)
     with col_nota1:
-        st.subheader("📚 Fuente de Datos")
+        st.subheader("Fuente de Datos")
         st.write("**Our World in Data (OWID)**")
         st.write("Dataset de emisiones de carbono compilado por investigadores de la Universidad de Oxford.")
         st.write("- **Cobertura:** 180+ países")
