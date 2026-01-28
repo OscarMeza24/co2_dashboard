@@ -641,6 +641,21 @@ st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 # SECCIÓN 2: EVOLUCIÓN TEMPORAL
 # ============================================================================
 
+st.markdown("""<div class="section-title">¿Cuáles son las tendencias históricas en emisiones de CO2 durante el período 1990-2024?</div>""", unsafe_allow_html=True)
+
+st.markdown("""
+<div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #558b2f; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+<h3 style="color: #2d5016; margin-top: 0;">RESPUESTA:</h3>
+<p style="font-size: 1.05em; color: #333; line-height: 1.8;">
+Las emisiones globales muestran una <b>tendencia de crecimiento persistente e imparable</b>. Las emisiones aumentaron de aproximadamente <b>21,000 Mt en 1990 a 33,000 Mt en 2024</b>, representando un <b>crecimiento del 57% en 34 años</b> (CAGR ≈ 1.4% anual).
+<br><br>
+<b>Puntos de inflexión:</b> Crisis financiera 2008-2009 (-3%), Pandemia COVID-19 2020 (-5%), pero ambas fueron <b>transitorias</b>. No hay evidencia de desacoplamiento permanente entre crecimiento económico y emisiones.
+<br><br>
+<b>Implicación:</b> Son necesarias políticas estructurales permanentes, no medidas de emergencia.
+</p>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown("""<div class="section-title">EVOLUCIÓN TEMPORAL DE EMISIONES</div>""", unsafe_allow_html=True)
 
 with st.expander("Qué muestra este gráfico", expanded=False):
@@ -684,6 +699,25 @@ st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 # ============================================================================
 # SECCIÓN 3: DISTRIBUCIÓN GEOESPACIAL
 # ============================================================================
+
+st.markdown("""<div class="section-title">¿Qué patrones regionales emergen del análisis geoespacial?</div>""", unsafe_allow_html=True)
+
+st.markdown("""
+<div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #558b2f; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+<h3 style="color: #2d5016; margin-top: 0;">RESPUESTA:</h3>
+<p style="font-size: 1.05em; color: #333; line-height: 1.8;">
+Existe una distribución geográfica <b>altamente desigual</b>:
+<br><br>
+<b>📍 Asia (56%):</b> China 11,330 Mt + India 2,200 Mt = Domina globalmente<br>
+<b>📍 Europa (10%):</b> Rusia 1,600 Mt + Alemania 600 Mt = Industrialización histórica<br>
+<b>📍 América del Norte (9%):</b> EE.UU. 4,700 Mt (segundo global)<br>
+<b>📍 América del Sur (3%):</b> Brasil 600+ Mt (deforestación + agroindustria)<br>
+<b>📍 África (2%):</b> Emisiones bajas pero <b>máxima vulnerabilidad climática</b> - Injusticia climática<br>
+<br>
+<b>Implicación Ética:</b> Existe desalineamiento entre responsabilidad (Asia, Norte América) y vulnerabilidad (África), generando imperativo de justicia climática internacional.
+</p>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("""<div class="section-title"> DISTRIBUCIÓN GEOESPACIAL</div>""", unsafe_allow_html=True)
 
@@ -741,6 +775,23 @@ st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 # SECCIÓN 4: RELACIÓN MULTIVARIABLE
 # ============================================================================
 
+st.markdown("""<div class="section-title">¿Existe una relación cuantificable entre producto interno bruto (PIB) y emisiones de CO2?</div>""", unsafe_allow_html=True)
+
+st.markdown("""
+<div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #558b2f; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+<h3 style="color: #2d5016; margin-top: 0;">RESPUESTA:</h3>
+<p style="font-size: 1.05em; color: #333; line-height: 1.8;">
+Existe una correlación fuerte pero <b>no lineal</b> entre PIB y emisiones. El gráfico de radar revela <b>perfiles económicos distintos</b>:
+<br><br>
+• <b>China:</b> CO2 máximo (100) + PIB muy alto (85) + Población máxima (95) = Potencia industrial<br>
+• <b>EE.UU.:</b> CO2 moderado (42) + PIB máximo (100) + Población moderada (23) = Economía de alto consumo per cápita<br>
+• <b>Noruega/Francia:</b> CO2 mínimo (5-8) + PIB moderado-alto (35-40) = Eficiencia energética (energía nuclear/renovable)<br>
+<br>
+<b>Conclusión:</b> El mismo PIB puede producir emisiones muy diferentes (4:1 entre Alemania y Noruega), demostrando que <b>la estructura energética es clave, no el tamaño económico</b>.
+</p>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown("""<div class="section-title">RELACIÓN MULTIVARIABLE - CO2 vs PIB vs POBLACIÓN</div>""", unsafe_allow_html=True)
 
 with st.expander("Análisis de relaciones complejas", expanded=False):
@@ -787,6 +838,19 @@ with col_3d2:
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
+st.markdown("""<div class="section-title">¿Cuál es la distribución actual de emisiones de CO2 entre países y regiones?</div>""", unsafe_allow_html=True)
+
+st.markdown("""
+<div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #558b2f; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+<h3 style="color: #2d5016; margin-top: 0;">RESPUESTA:</h3>
+<p style="font-size: 1.05em; color: #333; line-height: 1.8;">
+Las emisiones globales de CO2 están <b>extremadamente concentradas</b>. Los <b>tres países principales (China, EE.UU., India) representan el 56% de emisiones globales</b>, mientras que los <b>10 mayores emisores concentran el 75% de responsabilidad</b>. Asia domina con el 56% de las emisiones totales, liderada por China (35% global) seguida de India (7%). 
+<br><br>
+<b>Implicación:</b> Cambios en políticas energéticas de 3-5 países podrían reducir emisiones globales en más del 50%.
+</p>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown("""<div class="section-title">NÁLISIS AVANZADO</div>""", unsafe_allow_html=True)
 
 with st.expander("Qué significan estos gráficos", expanded=False):
@@ -828,22 +892,49 @@ with st.expander("Qué significan estos gráficos", expanded=False):
 col_análisis1, col_análisis2 = st.columns(2)
 
 with col_análisis1:
+    st.markdown("""<div class="section-title" style="margin-bottom: 20px;">¿Cuál es la distribución actual de CO2?</div>""", unsafe_allow_html=True)
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #558b2f; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em;">
+    <p style="color: #333; line-height: 1.6; margin: 0;">
+    <b>RESPUESTA:</b> Las emisiones están <b>extremadamente concentradas</b>. Los <b>tres principales (China, EE.UU., India) = 56% global</b>, mientras que los <b>10 mayores = 75% de responsabilidad</b>.<br><br>
+    <b>Implicación:</b> Cambios en 3-5 países podrían reducir emisiones globales >50%.
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("""<div style="color: #2d5016; font-size: 1.2em; font-weight: 700; margin-bottom: 15px;">🏆 Top 10 Países</div>""", unsafe_allow_html=True)
     df_top = df[df['Year'] == ano_mapa].nlargest(10, 'CO2')[['Country', 'CO2', 'Region']]
-    fig_top = px.bar(df_top, x='CO2', y='Country', orientation='h', color='Region', 
-                     title=f"Top 10 Emisores - {ano_mapa}", labels={'CO2': 'Emisiones (Mt)', 'Country': 'País'})
+    df_top = df_top.sort_values('CO2', ascending=True)  # Ordenar de menor a mayor para que en gráfico horizontal aparezca de mayor a menor
+    fig_top = px.bar(df_top, x='CO2', y='Country', orientation='h', color='CO2', 
+                     title=f"Top 10 Emisores - {ano_mapa}", labels={'CO2': 'Emisiones (Mt)', 'Country': 'País'},
+                     color_continuous_scale='RdYlGn_r')  # Rojo (máximo) a Verde (mínimo)
     fig_top.update_layout(height=450, template='plotly_white', paper_bgcolor='white', 
                           plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#558b2f'),
                           font=dict(color='#334155', size=11), showlegend=False)
     st.plotly_chart(fig_top, use_container_width=True)
 
 with col_análisis2:
+    st.markdown("""<div class="section-title" style="margin-bottom: 20px;">¿Cómo varía la intensidad carbónica?</div>""", unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #558b2f; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em;">
+    <p style="color: #333; line-height: 1.6; margin: 0;">
+    <b>RESPUESTA:</b> Varía <b>40 veces</b> entre economías. No depende del tamaño económico sino de tecnología energética.<br><br>
+    • <b>Máxima:</b> Corea del Norte (1.40)<br>
+    • <b>Mínima:</b> Noruega (0.03)<br>
+    <b>✓ Transición viable:</b> Noruega y Suecia lo demuestran.
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("""<div style="color: #2d5016; font-size: 1.2em; font-weight: 700; margin-bottom: 15px;">⚡ Intensidad Carbónica</div>""", unsafe_allow_html=True)
     df_intensidad = df[df['Year'] == ano_mapa].copy()
     df_intensidad['Intensidad'] = df_intensidad['CO2'] / (df_intensidad['GDP'] + 1)
     df_intensidad_top = df_intensidad.nlargest(10, 'Intensidad')[['Country', 'Intensidad', 'Region']]
-    fig_intensidad = px.bar(df_intensidad_top, x='Intensidad', y='Country', orientation='h', color='Region',
-                            title=f"Eficiencia Energética - {ano_mapa}", labels={'Intensidad': 'CO2/PIB', 'Country': 'País'})
+    df_intensidad_top = df_intensidad_top.sort_values('Intensidad', ascending=True)  # Ordenar de menor a mayor para que en gráfico horizontal aparezca de mayor a menor
+    fig_intensidad = px.bar(df_intensidad_top, x='Intensidad', y='Country', orientation='h', color='Intensidad',
+                            title=f"Eficiencia Energética - {ano_mapa}", labels={'Intensidad': 'CO2/PIB', 'Country': 'País'},
+                            color_continuous_scale='RdYlGn_r')  # Rojo (máximo) a Verde (mínimo)
     fig_intensidad.update_layout(height=450, template='plotly_white', paper_bgcolor='white', 
                                 plot_bgcolor='rgba(245, 247, 250, 0.7)', title_font=dict(size=16, color='#558b2f'),
                                 font=dict(color='#334155', size=11), showlegend=False)

@@ -1,10 +1,10 @@
-# 🌍 Dashboard Interactivo de Emisiones CO2
+# Dashboard Interactivo de Emisiones CO2
 
 Un dashboard completo desarrollado con **Streamlit** y **Plotly** para analizar emisiones de dióxido de carbono a nivel global (2015-2022).
 
-## 📋 Características
+## Características
 
-### ✨ Visualizaciones Interactivas
+### Visualizaciones Interactivas
 1. **Gráfico de Líneas Temporal** - Evolución de emisiones por país con filtros
    - Zoom y pan interactivo
    - Tooltips detallados
@@ -25,19 +25,19 @@ Un dashboard completo desarrollado con **Streamlit** y **Plotly** para analizar 
    - Top 10 países emisores
    - Intensidad carbónica (CO2/PIB)
 
-### 🎛️ Controles Interactivos en Sidebar
+### Controles Interactivos en Sidebar
 - Selector de región
 - Multiselector de países
 - Sliders para rango de años
 - Selector de año para mapas
 
-### 📊 Panel de Estadísticas
+### Panel de Estadísticas
 - CO2 Total y Promedio
 - PIB Total
 - Población Total
 - Número de países analizados
 
-## 🚀 Instalación y Uso
+## Instalación y Uso
 
 ### 1. Requisitos Previos
 - Python 3.8 o superior
@@ -57,7 +57,7 @@ streamlit run app.py
 
 El dashboard se abrirá automáticamente en tu navegador en `http://localhost:8501`
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 co2_dashboard/
@@ -67,7 +67,7 @@ co2_dashboard/
 └── README.md             # Este archivo
 ```
 
-## 📊 Fuentes de Datos
+## Fuentes de Datos
 
 El archivo `data_co2.csv` contiene:
 - **Country**: Nombre del país
@@ -82,7 +82,7 @@ El archivo `data_co2.csv` contiene:
 - Alemania, Reino Unido, Brasil, México, Canadá
 - Australia, Corea del Sur
 
-## 🔧 Estructura del Código
+## Estructura del Código
 
 ### Funciones Principales
 
@@ -104,7 +104,7 @@ Construye scatter plot 3D con codificación multivariable.
 #### `crear_grafico_distribucion_regional(df, ano)`
 Produce gráfico de barras horizontales con distribución por región.
 
-## 🎨 Características de Diseño
+## Características de Diseño
 
 - **Tema**: Plotly White con fondo claro
 - **Colores**: Escalas Viridis y RdYlGn para mejor interpretación
@@ -112,7 +112,7 @@ Produce gráfico de barras horizontales con distribución por región.
 - **Responsive**: Adaptable a diferentes tamaños de pantalla
 - **Interactivo**: Todos los gráficos soportan zoom, pan y hover
 
-## 📈 Cómo Usar el Dashboard
+## Cómo Usar el Dashboard
 
 ### Workflow Típico
 
@@ -133,7 +133,7 @@ Produce gráfico de barras horizontales con distribución por región.
 - **Hover**: Pasa el cursor para ver datos detallados
 - **Descarga**: Usa el ícono de cámara para exportar gráficos
 
-## 🔄 Actualizar con Nuevos Datos
+## Actualizar con Nuevos Datos
 
 Para actualizar con nuevos datos:
 
@@ -141,7 +141,7 @@ Para actualizar con nuevos datos:
 2. Asegúrate de mantener el formato: Country, Region, Year, CO2, GDP, Population
 3. Reinicia Streamlit: presiona `Ctrl+C` y ejecuta `streamlit run app.py` nuevamente
 
-## 🐛 Solución de Problemas
+## Solución de Problemas
 
 ### "ModuleNotFoundError: No module named 'streamlit'"
 ```bash
@@ -157,7 +157,7 @@ pip install streamlit
 - Verifica que `data_co2.csv` está en el mismo directorio que `app.py`
 - Comprueba que el formato CSV es correcto
 
-## 📝 Requisitos Completados
+## Requisitos Completados
 
 ✅ Carga de dataset CSV con 6 columnas  
 ✅ 3 visualizaciones principales con Plotly Express  
@@ -168,7 +168,7 @@ pip install streamlit
 ✅ Pandas para manejo de datos  
 ✅ Ejecutable con `streamlit run app.py`  
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 - **Streamlit**: Framework para aplicaciones web de datos
 - **Plotly**: Biblioteca de gráficos interactivos
