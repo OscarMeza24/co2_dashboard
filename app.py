@@ -838,19 +838,6 @@ with col_3d2:
 
 st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
-st.markdown("""<div class="section-title">¿Cuál es la distribución actual de emisiones de CO2 entre países y regiones?</div>""", unsafe_allow_html=True)
-
-st.markdown("""
-<div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #558b2f; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
-<h3 style="color: #2d5016; margin-top: 0;">RESPUESTA:</h3>
-<p style="font-size: 1.05em; color: #333; line-height: 1.8;">
-Las emisiones globales de CO2 están <b>extremadamente concentradas</b>. Los <b>tres países principales (China, EE.UU., India) representan el 56% de emisiones globales</b>, mientras que los <b>10 mayores emisores concentran el 75% de responsabilidad</b>. Asia domina con el 56% de las emisiones totales, liderada por China (35% global) seguida de India (7%). 
-<br><br>
-<b>Implicación:</b> Cambios en políticas energéticas de 3-5 países podrían reducir emisiones globales en más del 50%.
-</p>
-</div>
-""", unsafe_allow_html=True)
-
 st.markdown("""<div class="section-title">NÁLISIS AVANZADO</div>""", unsafe_allow_html=True)
 
 with st.expander("Qué significan estos gráficos", expanded=False):
